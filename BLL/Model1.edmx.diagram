@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b713b00338284f8e926cff1600314de5" Name="Diagram1">
+        <EntityTypeShape EntityType="Typing_Practice_DBModel.baitap" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Typing_Practice_DBModel.diemdanh" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Typing_Practice_DBModel.kiluc" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Typing_Practice_DBModel.nguoidung" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Typing_Practice_DBModel.taikhoan" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="Typing_Practice_DBModel.FK__kiluc__mabaitap__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="Typing_Practice_DBModel.FK__diemdanh__manguo__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Typing_Practice_DBModel.FK__kiluc__manguoidu__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Typing_Practice_DBModel.FK__taikhoan__manguo__3F466844" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

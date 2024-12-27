@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Typing_Practice_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="baitap">
+          <Key>
+            <PropertyRef Name="mabaitap" />
+          </Key>
+          <Property Name="mabaitap" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tenbaitap" Type="varchar" MaxLength="50" />
+          <Property Name="noidung" Type="varchar" MaxLength="255" />
+          <Property Name="dokho" Type="varchar" MaxLength="20" />
+          <Property Name="thoigian" Type="time" Precision="7" />
+          <Property Name="ngaytao" Type="date" />
+          <Property Name="diemmokhoa" Type="float" />
+          <Property Name="Xoa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="diemdanh">
+          <Key>
+            <PropertyRef Name="manguoidung" />
+            <PropertyRef Name="ngay" />
+          </Key>
+          <Property Name="manguoidung" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ngay" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kiluc">
+          <Key>
+            <PropertyRef Name="makiluc" />
+          </Key>
+          <Property Name="makiluc" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="manguoidung" Type="varchar" MaxLength="10" />
+          <Property Name="mabaitap" Type="varchar" MaxLength="10" />
+          <Property Name="diembaitap" Type="float" />
+          <Property Name="solanthuchien" Type="int" />
+        </EntityType>
+        <EntityType Name="nguoidung">
+          <Key>
+            <PropertyRef Name="manguoidung" />
+          </Key>
+          <Property Name="manguoidung" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="hoten" Type="nvarchar" MaxLength="255" />
+          <Property Name="gioitinh" Type="bit" />
+          <Property Name="ngaysinh" Type="date" />
+          <Property Name="sdt" Type="varchar" MaxLength="10" />
+          <Property Name="tongdiem" Type="float" />
+        </EntityType>
+        <EntityType Name="taikhoan">
+          <Key>
+            <PropertyRef Name="mataikhoan" />
+          </Key>
+          <Property Name="mataikhoan" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="manguoidung" Type="varchar" MaxLength="10" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="role" Type="bit" />
+        </EntityType>
+        <Association Name="FK__diemdanh__manguo__403A8C7D">
+          <End Role="nguoidung" Type="Self.nguoidung" Multiplicity="1" />
+          <End Role="diemdanh" Type="Self.diemdanh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoidung">
+              <PropertyRef Name="manguoidung" />
+            </Principal>
+            <Dependent Role="diemdanh">
+              <PropertyRef Name="manguoidung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__kiluc__mabaitap__4222D4EF">
+          <End Role="baitap" Type="Self.baitap" Multiplicity="0..1" />
+          <End Role="kiluc" Type="Self.kiluc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="baitap">
+              <PropertyRef Name="mabaitap" />
+            </Principal>
+            <Dependent Role="kiluc">
+              <PropertyRef Name="mabaitap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__kiluc__manguoidu__412EB0B6">
+          <End Role="nguoidung" Type="Self.nguoidung" Multiplicity="0..1" />
+          <End Role="kiluc" Type="Self.kiluc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoidung">
+              <PropertyRef Name="manguoidung" />
+            </Principal>
+            <Dependent Role="kiluc">
+              <PropertyRef Name="manguoidung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taikhoan__manguo__3F466844">
+          <End Role="nguoidung" Type="Self.nguoidung" Multiplicity="0..1" />
+          <End Role="taikhoan" Type="Self.taikhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoidung">
+              <PropertyRef Name="manguoidung" />
+            </Principal>
+            <Dependent Role="taikhoan">
+              <PropertyRef Name="manguoidung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Typing_Practice_DBModelStoreContainer">
+          <EntitySet Name="baitap" EntityType="Self.baitap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="diemdanh" EntityType="Self.diemdanh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kiluc" EntityType="Self.kiluc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nguoidung" EntityType="Self.nguoidung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taikhoan" EntityType="Self.taikhoan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__diemdanh__manguo__403A8C7D" Association="Self.FK__diemdanh__manguo__403A8C7D">
+            <End Role="nguoidung" EntitySet="nguoidung" />
+            <End Role="diemdanh" EntitySet="diemdanh" />
+          </AssociationSet>
+          <AssociationSet Name="FK__kiluc__mabaitap__4222D4EF" Association="Self.FK__kiluc__mabaitap__4222D4EF">
+            <End Role="baitap" EntitySet="baitap" />
+            <End Role="kiluc" EntitySet="kiluc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__kiluc__manguoidu__412EB0B6" Association="Self.FK__kiluc__manguoidu__412EB0B6">
+            <End Role="nguoidung" EntitySet="nguoidung" />
+            <End Role="kiluc" EntitySet="kiluc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taikhoan__manguo__3F466844" Association="Self.FK__taikhoan__manguo__3F466844">
+            <End Role="nguoidung" EntitySet="nguoidung" />
+            <End Role="taikhoan" EntitySet="taikhoan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Typing_Practice_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="baitap">
+          <Key>
+            <PropertyRef Name="mabaitap" />
+          </Key>
+          <Property Name="mabaitap" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tenbaitap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="noidung" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dokho" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="thoigian" Type="Time" Precision="7" />
+          <Property Name="ngaytao" Type="DateTime" Precision="0" />
+          <Property Name="diemmokhoa" Type="Double" />
+          <Property Name="Xoa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="kiluc" Relationship="Self.FK__kiluc__mabaitap__4222D4EF" FromRole="baitap" ToRole="kiluc" />
+        </EntityType>
+        <EntityType Name="diemdanh">
+          <Key>
+            <PropertyRef Name="manguoidung" />
+            <PropertyRef Name="ngay" />
+          </Key>
+          <Property Name="manguoidung" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ngay" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="nguoidung" Relationship="Self.FK__diemdanh__manguo__403A8C7D" FromRole="diemdanh" ToRole="nguoidung" />
+        </EntityType>
+        <EntityType Name="kiluc">
+          <Key>
+            <PropertyRef Name="makiluc" />
+          </Key>
+          <Property Name="makiluc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="manguoidung" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="mabaitap" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="diembaitap" Type="Double" />
+          <Property Name="solanthuchien" Type="Int32" />
+          <NavigationProperty Name="baitap" Relationship="Self.FK__kiluc__mabaitap__4222D4EF" FromRole="kiluc" ToRole="baitap" />
+          <NavigationProperty Name="nguoidung" Relationship="Self.FK__kiluc__manguoidu__412EB0B6" FromRole="kiluc" ToRole="nguoidung" />
+        </EntityType>
+        <EntityType Name="nguoidung">
+          <Key>
+            <PropertyRef Name="manguoidung" />
+          </Key>
+          <Property Name="manguoidung" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hoten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="gioitinh" Type="Boolean" />
+          <Property Name="ngaysinh" Type="DateTime" Precision="0" />
+          <Property Name="sdt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="tongdiem" Type="Double" />
+          <NavigationProperty Name="diemdanh" Relationship="Self.FK__diemdanh__manguo__403A8C7D" FromRole="nguoidung" ToRole="diemdanh" />
+          <NavigationProperty Name="kiluc" Relationship="Self.FK__kiluc__manguoidu__412EB0B6" FromRole="nguoidung" ToRole="kiluc" />
+          <NavigationProperty Name="taikhoan" Relationship="Self.FK__taikhoan__manguo__3F466844" FromRole="nguoidung" ToRole="taikhoan" />
+        </EntityType>
+        <EntityType Name="taikhoan">
+          <Key>
+            <PropertyRef Name="mataikhoan" />
+          </Key>
+          <Property Name="mataikhoan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="manguoidung" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Boolean" />
+          <NavigationProperty Name="nguoidung" Relationship="Self.FK__taikhoan__manguo__3F466844" FromRole="taikhoan" ToRole="nguoidung" />
+        </EntityType>
+        <Association Name="FK__kiluc__mabaitap__4222D4EF">
+          <End Role="baitap" Type="Self.baitap" Multiplicity="0..1" />
+          <End Role="kiluc" Type="Self.kiluc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="baitap">
+              <PropertyRef Name="mabaitap" />
+            </Principal>
+            <Dependent Role="kiluc">
+              <PropertyRef Name="mabaitap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__diemdanh__manguo__403A8C7D">
+          <End Role="nguoidung" Type="Self.nguoidung" Multiplicity="1" />
+          <End Role="diemdanh" Type="Self.diemdanh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoidung">
+              <PropertyRef Name="manguoidung" />
+            </Principal>
+            <Dependent Role="diemdanh">
+              <PropertyRef Name="manguoidung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__kiluc__manguoidu__412EB0B6">
+          <End Role="nguoidung" Type="Self.nguoidung" Multiplicity="0..1" />
+          <End Role="kiluc" Type="Self.kiluc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoidung">
+              <PropertyRef Name="manguoidung" />
+            </Principal>
+            <Dependent Role="kiluc">
+              <PropertyRef Name="manguoidung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taikhoan__manguo__3F466844">
+          <End Role="nguoidung" Type="Self.nguoidung" Multiplicity="0..1" />
+          <End Role="taikhoan" Type="Self.taikhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoidung">
+              <PropertyRef Name="manguoidung" />
+            </Principal>
+            <Dependent Role="taikhoan">
+              <PropertyRef Name="manguoidung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Typing_Practice_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="baitap" EntityType="Self.baitap" />
+          <EntitySet Name="diemdanh" EntityType="Self.diemdanh" />
+          <EntitySet Name="kiluc" EntityType="Self.kiluc" />
+          <EntitySet Name="nguoidung" EntityType="Self.nguoidung" />
+          <EntitySet Name="taikhoan" EntityType="Self.taikhoan" />
+          <AssociationSet Name="FK__kiluc__mabaitap__4222D4EF" Association="Self.FK__kiluc__mabaitap__4222D4EF">
+            <End Role="baitap" EntitySet="baitap" />
+            <End Role="kiluc" EntitySet="kiluc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__diemdanh__manguo__403A8C7D" Association="Self.FK__diemdanh__manguo__403A8C7D">
+            <End Role="nguoidung" EntitySet="nguoidung" />
+            <End Role="diemdanh" EntitySet="diemdanh" />
+          </AssociationSet>
+          <AssociationSet Name="FK__kiluc__manguoidu__412EB0B6" Association="Self.FK__kiluc__manguoidu__412EB0B6">
+            <End Role="nguoidung" EntitySet="nguoidung" />
+            <End Role="kiluc" EntitySet="kiluc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taikhoan__manguo__3F466844" Association="Self.FK__taikhoan__manguo__3F466844">
+            <End Role="nguoidung" EntitySet="nguoidung" />
+            <End Role="taikhoan" EntitySet="taikhoan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Typing_Practice_DBModelStoreContainer" CdmEntityContainer="Typing_Practice_DBEntities">
+          <EntitySetMapping Name="baitap">
+            <EntityTypeMapping TypeName="Typing_Practice_DBModel.baitap">
+              <MappingFragment StoreEntitySet="baitap">
+                <ScalarProperty Name="mabaitap" ColumnName="mabaitap" />
+                <ScalarProperty Name="tenbaitap" ColumnName="tenbaitap" />
+                <ScalarProperty Name="noidung" ColumnName="noidung" />
+                <ScalarProperty Name="dokho" ColumnName="dokho" />
+                <ScalarProperty Name="thoigian" ColumnName="thoigian" />
+                <ScalarProperty Name="ngaytao" ColumnName="ngaytao" />
+                <ScalarProperty Name="diemmokhoa" ColumnName="diemmokhoa" />
+                <ScalarProperty Name="Xoa" ColumnName="Xoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="diemdanh">
+            <EntityTypeMapping TypeName="Typing_Practice_DBModel.diemdanh">
+              <MappingFragment StoreEntitySet="diemdanh">
+                <ScalarProperty Name="manguoidung" ColumnName="manguoidung" />
+                <ScalarProperty Name="ngay" ColumnName="ngay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kiluc">
+            <EntityTypeMapping TypeName="Typing_Practice_DBModel.kiluc">
+              <MappingFragment StoreEntitySet="kiluc">
+                <ScalarProperty Name="makiluc" ColumnName="makiluc" />
+                <ScalarProperty Name="manguoidung" ColumnName="manguoidung" />
+                <ScalarProperty Name="mabaitap" ColumnName="mabaitap" />
+                <ScalarProperty Name="diembaitap" ColumnName="diembaitap" />
+                <ScalarProperty Name="solanthuchien" ColumnName="solanthuchien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nguoidung">
+            <EntityTypeMapping TypeName="Typing_Practice_DBModel.nguoidung">
+              <MappingFragment StoreEntitySet="nguoidung">
+                <ScalarProperty Name="manguoidung" ColumnName="manguoidung" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="gioitinh" ColumnName="gioitinh" />
+                <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+                <ScalarProperty Name="tongdiem" ColumnName="tongdiem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taikhoan">
+            <EntityTypeMapping TypeName="Typing_Practice_DBModel.taikhoan">
+              <MappingFragment StoreEntitySet="taikhoan">
+                <ScalarProperty Name="mataikhoan" ColumnName="mataikhoan" />
+                <ScalarProperty Name="manguoidung" ColumnName="manguoidung" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
